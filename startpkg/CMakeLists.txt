@@ -21,13 +21,26 @@ include_directories(
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(rclcpp_components REQUIRED)
-
+#find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
-add_executable(talker src/main.cpp lib/SimplePublisher.cpp)
 
-ament_target_dependencies(talker rclcpp rclcpp_components std_msgs )
 
+add_library(pub SHARED lib/SimplePublisher.cpp)
+add_library(sub SHARED lib/SimpleSubscriber.cpp)
+ament_target_dependencies(pub rclcpp  std_msgs)
+ament_target_dependencies(sub rclcpp  std_msgs)
+
+add_executable(talker src/main.cpp)
+
+target_link_libraries(talker pub sub)
+ament_target_dependencies(talker rclcpp  std_msgs )
+
+install(TARGETS
+  pub
+  sub
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin)
 
 install(TARGETS
   talker
