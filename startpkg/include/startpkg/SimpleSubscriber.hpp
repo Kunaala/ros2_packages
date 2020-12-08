@@ -3,6 +3,8 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 #include<string>
+
+
 class SimpleSubscriber : public rclcpp::Node
 {
     public:
@@ -10,5 +12,5 @@ class SimpleSubscriber : public rclcpp::Node
 
     private:
         rclcpp::Subscription<std_msgs::msg::String>::SharedPtr sub1_;
-        void topic_callback(const std_msgs::msg::String::SharedPtr msg);
+        void topic_callback(const std_msgs::msg::String::SharedPtr m1);
 };

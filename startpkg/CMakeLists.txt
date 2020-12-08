@@ -24,20 +24,25 @@ find_package(rclcpp REQUIRED)
 #find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
 
+find_package(new_interfaces REQUIRED)
 
-add_library(pub SHARED lib/SimplePublisher.cpp)
-add_library(sub SHARED lib/SimpleSubscriber.cpp)
-ament_target_dependencies(pub rclcpp  std_msgs)
-ament_target_dependencies(sub rclcpp  std_msgs)
+
+add_library(${PROJECT_NAME}_core SHARED
+      lib/SimplePublisher.cpp  
+      lib/SimpleSubscriber.cpp
+      lib/ParameterServer.cpp
+)
+
+
+ament_target_dependencies(${PROJECT_NAME}_core rclcpp std_msgs new_interfaces)
 
 add_executable(talker src/main.cpp)
 
-target_link_libraries(talker pub sub)
+target_link_libraries(talker ${PROJECT_NAME}_core)
 ament_target_dependencies(talker rclcpp  std_msgs )
 
 install(TARGETS
-  pub
-  sub
+${PROJECT_NAME}_core 
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin)

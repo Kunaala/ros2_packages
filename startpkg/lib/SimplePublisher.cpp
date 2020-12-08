@@ -13,7 +13,3 @@ void SimplePublisher::timer_callback()
     RCLCPP_INFO(get_logger(), "Publishing %s", m1.data.c_str());
     pub1_->publish(m1);
 }
-
-// #include "rclcpp_components/register_node_macro.hpp"
-
-// RCLCPP_COMPONENTS_REGISTER_NODE(SimplePublisher)
