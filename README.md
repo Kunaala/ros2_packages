@@ -1,9 +1,9 @@
 # ros2_packages
-## ROS package to read and write from Modbus Slave in RTU mode 
+## ROS2 package boilerplates for services, publisher, subscriber
 
 ## Features:
 
-1. **Configurable register mapping <br />** 
+1. **Custom ROS2 Packages <br />** 
 
 
 ## Frameworks/libraries used for building.
