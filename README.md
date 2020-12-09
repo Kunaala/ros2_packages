@@ -4,7 +4,10 @@
 
 ## Features:
 
-1. **Custom ROS2 Packages <br />** 
+**Custom ROS2 Packages for <br />** 
+1. Publishing and Subscribing topics
+2. Hosting Services
+3. Composition
 
 
 ## Frameworks/libraries used for building.
