@@ -18,10 +18,11 @@ endif()
 include_directories(
   include/startpkg
 )
+
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-#find_package(rclcpp_components REQUIRED)
+find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
 
 find_package(new_interfaces REQUIRED)
@@ -37,9 +38,15 @@ add_library(${PROJECT_NAME}_core SHARED
 ament_target_dependencies(${PROJECT_NAME}_core rclcpp std_msgs new_interfaces)
 
 add_executable(talker src/main.cpp)
+add_executable(compose lib/simplecompose.cpp)
+
 
 target_link_libraries(talker ${PROJECT_NAME}_core)
+target_link_libraries(compose ${PROJECT_NAME}_core)
+
 ament_target_dependencies(talker rclcpp  std_msgs )
+
+ament_target_dependencies(compose rclcpp  std_msgs rclcpp_components )
 
 install(TARGETS
 ${PROJECT_NAME}_core 
@@ -49,6 +56,7 @@ ${PROJECT_NAME}_core
 
 install(TARGETS
   talker
+  compose
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
